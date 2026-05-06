@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/page": "/admin",
+  "/api/checkout/route": "/api/checkout",
+  "/api/webhook/route": "/api/webhook",
+  "/artist/[id]/page": "/artist/[id]",
+  "/certificate/[cert_id]/page": "/certificate/[cert_id]",
+  "/favicon.ico/route": "/favicon.ico",
+  "/gallery/page": "/gallery",
+  "/page": "/",
+  "/purchase-success/page": "/purchase-success",
+  "/work/[id]/page": "/work/[id]"
+}

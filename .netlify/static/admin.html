@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Art Exhibition 2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, sans-serif; background: #f9fafb; color: #111; }
+.login { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1); width: 320px; }
+h1 { font-family: Georgia, serif; font-size: 28px; font-weight: 300; text-align: center; margin-bottom: 24px; }
+h2 { font-family: Georgia, serif; font-size: 20px; font-weight: 400; margin-bottom: 16px; }
+input, select, textarea { width: 100%; border: 1px solid #e5e5e5; border-radius: 4px; padding: 8px 12px; font-size: 14px; margin-bottom: 4px; }
+textarea { height: 80px; resize: vertical; }
+label { font-size: 11px; color: #888; text-transform: uppercase; display: block; margin-bottom: 4px; margin-top: 12px; }
+.btn { background: #111; color: white; border: none; padding: 10px 20px; font-size: 13px; cursor: pointer; border-radius: 4px; }
+.btn-ghost { background: white; color: #111; border: 1px solid #ddd; padding: 10px 20px; font-size: 13px; cursor: pointer; border-radius: 4px; margin-left: 8px; }
+.btn-sm { padding: 4px 12px; font-size: 12px; }
+.btn-danger { background: #fee2e2; color: #dc2626; border: none; padding: 4px 12px; font-size: 12px; cursor: pointer; border-radius: 4px; margin-left: 4px; }
+.tabs { display: flex; border-bottom: 1px solid #e5e5e5; margin-bottom: 32px; }
+.tab { padding: 10px 20px; border: none; border-bottom: 2px solid transparent; background: none; cursor: pointer; font-size: 14px; color: #999; }
+.tab.active { border-bottom-color: #111; color: #111; }
+.main { max-width: 960px; margin: 0 auto; padding: 32px 16px; }
+.row { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #f0f0f0; border-radius: 4px; margin-bottom: 8px; }
+.row-info { flex: 1; }
+.row-info p { margin: 0; font-size: 14px; font-weight: 500; }
+.row-info small { color: #999; font-size: 12px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1/-1; }
+.section { background: #f9fafb; padding: 24px; border-radius: 8px; margin-bottom: 32px; }
+.flash { background: #f0fdf4; color: #166534; padding: 8px 16px; border-radius: 4px; font-size: 13px; display: inline-block; }
+.err { color: red; font-size: 12px; margin-top: 4px; }
+#app { display: none; }
+.qr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.qr-card { border: 1px solid #e5e5e5; border-radius: 4px; padding: 12px; text-align: center; }
+.qr-card p { font-size: 11px; margin-top: 6px; font-weight: 600; }
+.qr-card small { color: #999; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="loginSection">
+  <div class="card">
+    <h1>Admin</h1>
+    <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" autofocus />
+    <p class="err" id="pwErr"></p>
+    <br>
+    <button class="btn" style="width:100%;margin-top:8px" onclick="doLogin()">Enter</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="main">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">
+      <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:300">Admin — Art Exhibition 2026</h1>
+      <span id="flashMsg" class="flash" style="display:none"></span>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('works',this)">Works</button>
+      <button class="tab" onclick="switchTab('artists',this)">Artists</button>
+      <button class="tab" onclick="switchTab('orders',this)">Orders</button>
+      <button class="tab" onclick="switchTab('qrcodes',this)">QR Codes</button>
+    </div>
+
+    <!-- WORKS TAB -->
+    <div id="tab-works">
+      <div class="section">
+        <h2 id="workFormTitle">Add Work</h2>
+        <input type="hidden" id="editWorkId">
+        <div class="grid2">
+          <div>
+            <label>Artist</label>
+            <select id="wArtist"></select>
+          </div>
+          <div>
+            <label>Title</label>
+            <input id="wTitle" placeholder="Artwork title">
+          </div>
+          <div>
+            <label>Medium</label>
+            <input id="wMedium" placeholder="Oil on canvas...">
+          </div>
+          <div>
+            <label>Price (USD)</label>
+            <input id="wPrice" type="number" placeholder="500">
+          </div>
+          <div>
+            <label>Width (cm)</label>
+            <input id="wWidth" type="number" placeholder="60">
+          </div>
+          <div>
+            <label>Height (cm)</label>
+            <input id="wHeight" type="number" placeholder="80">
+          </div>
+          <div>
+            <label>Year</label>
+            <input id="wYear" type="number" value="2026">
+          </div>
+          <div>
+            <label>Image URL</label>
+            <input id="wImage" placeholder="https://...">
+          </div>
+          <div class="full">
+            <label>Description</label>
+            <textarea id="wDesc" placeholder="About this work..."></textarea>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn" onclick="saveWork()">Add Work</button>
+          <button class="btn-ghost" id="cancelWork" style="display:none" onclick="cancelWork()">Cancel</button>
+        </div>
+      </div>
+      <h2>All Works (<span id="workCount">0</span>)</h2>
+      <div id="workList"></div>
+    </div>
+
+    <!-- ARTISTS TAB -->
+    <div id="tab-artists" style="display:none">
+      <div class="section">
+        <h2 id="artistFormTitle">Add Artist</h2>
+        <input type="hidden" id="editArtistId">
+        <div class="grid2">
+          <div><label>Name</label><input id="aName" placeholder="Full name"></div>
+          <div><label>School</label><input id="aSchool" placeholder="University name"></div>
+          <div><label>Graduation Year</label><input id="aYear" value="2026"></div>
+          <div><label>Instagram</label><input id="aInsta" placeholder="@handle"></div>
+          <div class="full"><label>Photo URL</label><input id="aPhoto" placeholder="https://..."></div>
+          <div class="full"><label>Bio</label><textarea id="aBio" placeholder="Artist biography..."></textarea></div>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn" onclick="saveArtist()">Add Artist</button>
+          <button class="btn-ghost" id="cancelArtist" style="display:none" onclick="cancelArtist()">Cancel</button>
+        </div>
+      </div>
+      <h2>All Artists (<span id="artistCount">0</span>)</h2>
+      <div id="artistList"></div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders" style="display:none">
+      <h2>Orders (<span id="orderCount">0</span>)</h2>
+      <div id="orderList"></div>
+    </div>
+
+    <!-- QR TAB -->
+    <div id="tab-qrcodes" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div>
+          <h2 style="margin-bottom:4px">QR Codes</h2>
+          <p style="color:#999;font-size:13px">Print and place next to each artwork</p>
+        </div>
+        <button class="btn" onclick="printQR()">Print All QR Codes</button>
+      </div>
+      <div class="qr-grid" id="qrGrid"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+const SB = 'https://mymezahwaaxunxaxqshe.supabase.co'
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15bWV6YWh3YWF4dW54YXhxc2hlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjAwNDMsImV4cCI6MjA4OTMzNjA0M30.NKq1a9aD3QT2m3T5Sz8SWCYfivXBrGMEUiG0GRJL_cQ'
+const H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }
+
+let artists = [], works = [], orders = []
+
+function doLogin() {
+  const v = document.getElementById('pwInput').value.trim()
+  if (v === 'art2026admin') {
+    document.getElementById('loginSection').style.display = 'none'
+    document.getElementById('app').style.display = 'block'
+    loadAll()
+  } else {
+    document.getElementById('pwErr').textContent = 'Wrong password'
+  }
+}
+
+async function api(method, table, data, filter) {
+  let url = SB + '/rest/v1/' + table
+  if (filter) url += '?' + filter
+  const opts = { method, headers: H }
+  if (data) opts.body = JSON.stringify(data)
+  const r = await fetch(url, opts)
+  if (method === 'GET') return r.json()
+  return r
+}
+
+async function loadAll() {
+  [artists, works, orders] = await Promise.all([
+    api('GET', 'art_artists', null, 'order=created_at.desc'),
+    api('GET', 'art_works', null, 'select=*,art_artists(name)&order=created_at.desc'),
+    api('GET', 'art_orders', null, 'select=*,art_works(title)&order=created_at.desc')
+  ])
+  renderWorks(); renderArtists(); renderOrders(); renderQR()
+  document.getElementById('wArtist').innerHTML = '<option value="">Select Artist</option>' +
+    artists.map(a => `<option value="${a.id}">${a.name}</option>`).join('')
+}
+
+function flash(msg) {
+  const el = document.getElementById('flashMsg')
+  el.textContent = msg; el.style.display = 'inline-block'
+  setTimeout(() => el.style.display = 'none', 2500)
+}
+
+function switchTab(name, btn) {
+  ['works','artists','orders','qrcodes'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none'
+  })
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+}
+
+// WORKS
+function renderWorks() {
+  document.getElementById('workCount').textContent = works.length
+  document.getElementById('workList').innerHTML = works.map(w => `
+    <div class="row">
+      ${w.image_url ? `<img src="${w.image_url}" style="width:48px;height:48px;object-fit:cover;border-radius:4px;flex-shrink:0">` : ''}
+      <div class="row-info">
+        <p>${w.title}</p>
+        <small>${w.art_artists?.name || ''} · $${w.price} · ${w.medium || ''}</small>
+      </div>
+      <select onchange="updateStatus('${w.id}', this.value)" style="border:1px solid #e5e5e5;border-radius:4px;padding:4px 8px;font-size:12px">
+        <option ${w.status==='available'?'selected':''}>available</option>
+        <option ${w.status==='reserved'?'selected':''}>reserved</option>
+        <option ${w.status==='sold'?'selected':''}>sold</option>
+      </select>
+      <button class="btn btn-sm" onclick="editWork('${w.id}')">Edit</button>
+      <button class="btn-danger" onclick="deleteWork('${w.id}')">Delete</button>
+    </div>`).join('') || '<p style="color:#999;font-style:italic">No works yet</p>'
+}
+
+async function saveWork() {
+  const id = document.getElementById('editWorkId').value
+  const data = {
+    artist_id: document.getElementById('wArtist').value,
+    title: document.getElementById('wTitle').value,
+    description: document.getElementById('wDesc').value,
+    medium: document.getElementById('wMedium').value,
+    width_cm: +document.getElementById('wWidth').value || 0,
+    height_cm: +document.getElementById('wHeight').value || 0,
+    year_created: document.getElementById('wYear').value,
+    price: +document.getElementById('wPrice').value || 0,
+    image_url: document.getElementById('wImage').value,
+    status: 'available'
+  }
+  if (!data.title || !data.artist_id) return alert('Title and artist required')
+  if (id) {
+    await api('PATCH', 'art_works', data, 'id=eq.' + id)
+  } else {
+    data.cert_id = 'CERT-' + Math.random().toString(36).substr(2, 8).toUpperCase()
+    await api('POST', 'art_works', data)
+  }
+  cancelWork(); flash('Saved!'); loadAll()
+}
+
+function editWork(id) {
+  const w = works.find(x => x.id === id)
+  if (!w) return
+  document.getElementById('editWorkId').value = id
+  document.getElementById('workFormTitle').textContent = 'Edit Work'
+  document.getElementById('cancelWork').style.display = 'inline-block'
+  document.getElementById('wArtist').value = w.artist_id
+  document.getElementById('wTitle').value = w.title
+  document.getElementById('wDesc').value = w.description || ''
+  document.getElementById('wMedium').value = w.medium || ''
+  document.getElementById('wWidth').value = w.width_cm || ''
+  document.getElementById('wHeight').value = w.height_cm || ''
+  document.getElementById('wYear').value = w.year_created || '2026'
+  document.getElementById('wPrice').value = w.price || ''
+  document.getElementById('wImage').value = w.image_url || ''
+  document.getElementById('tab-works').scrollIntoView()
+  switchTab('works', document.querySelectorAll('.tab')[0])
+}
+
+function cancelWork() {
+  document.getElementById('editWorkId').value = ''
+  document.getElementById('workFormTitle').textContent = 'Add Work'
+  document.getElementById('cancelWork').style.display = 'none'
+  ;['wArtist','wTitle','wDesc','wMedium','wWidth','wHeight','wPrice','wImage'].forEach(id => {
+    const el = document.getElementById(id)
+    if (el) el.value = id === 'wYear' ? '2026' : ''
+  })
+}
+
+async function updateStatus(id, status) {
+  await api('PATCH', 'art_works', { status }, 'id=eq.' + id)
+  flash('Status updated'); loadAll()
+}
+
+async function deleteWork(id) {
+  if (!confirm('Delete this work?')) return
+  await api('DELETE', 'art_works', null, 'id=eq.' + id)
+  flash('Deleted'); loadAll()
+}
+
+// ARTISTS
+function renderArtists() {
+  document.getElementById('artistCount').textContent = artists.length
+  document.getElementById('artistList').innerHTML = artists.map(a => `
+    <div class="row">
+      ${a.photo_url ? `<img src="${a.photo_url}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;flex-shrink:0">` : ''}
+      <div class="row-info">
+        <p>${a.name}</p>
+        <small>${a.school || ''} · Class of ${a.year || ''}</small>
+      </div>
+      <button class="btn btn-sm" onclick="editArtist('${a.id}')">Edit</button>
+      <button class="btn-danger" onclick="deleteArtist('${a.id}')">Delete</button>
+    </div>`).join('') || '<p style="color:#999;font-style:italic">No artists yet</p>'
+}
+
+async function saveArtist() {
+  const id = document.getElementById('editArtistId').value
+  const data = {
+    name: document.getElementById('aName').value,
+    school: document.getElementById('aSchool').value,
+    year: document.getElementById('aYear').value,
+    instagram: document.getElementById('aInsta').value,
+    photo_url: document.getElementById('aPhoto').value,
+    bio: document.getElementById('aBio').value
+  }
+  if (!data.name) return alert('Name required')
+  if (id) await api('PATCH', 'art_artists', data, 'id=eq.' + id)
+  else await api('POST', 'art_artists', data)
+  cancelArtist(); flash('Saved!'); loadAll()
+}
+
+function editArtist(id) {
+  const a = artists.find(x => x.id === id)
+  if (!a) return
+  document.getElementById('editArtistId').value = id
+  document.getElementById('artistFormTitle').textContent = 'Edit Artist'
+  document.getElementById('cancelArtist').style.display = 'inline-block'
+  document.getElementById('aName').value = a.name
+  document.getElementById('aSchool').value = a.school || ''
+  document.getElementById('aYear').value = a.year || '2026'
+  document.getElementById('aInsta').value = a.instagram || ''
+  document.getElementById('aPhoto').value = a.photo_url || ''
+  document.getElementById('aBio').value = a.bio || ''
+  switchTab('artists', document.querySelectorAll('.tab')[1])
+}
+
+function cancelArtist() {
+  document.getElementById('editArtistId').value = ''
+  document.getElementById('artistFormTitle').textContent = 'Add Artist'
+  document.getElementById('cancelArtist').style.display = 'none'
+  ;['aName','aSchool','aInsta','aPhoto','aBio'].forEach(id => document.getElementById(id).value = '')
+  document.getElementById('aYear').value = '2026'
+}
+
+async function deleteArtist(id) {
+  if (!confirm('Delete this artist?')) return
+  await api('DELETE', 'art_artists', null, 'id=eq.' + id)
+  flash('Deleted'); loadAll()
+}
+
+// ORDERS
+function renderOrders() {
+  document.getElementById('orderCount').textContent = orders.length
+  document.getElementById('orderList').innerHTML = orders.map(o => `
+    <div class="row" style="flex-wrap:wrap">
+      <div class="row-info">
+        <p>${o.buyer_name} — ${o.buyer_email}</p>
+        <small>${o.art_works?.title || ''}</small>
+      </div>
+      <div style="text-align:right">
+        <p style="font-weight:600">$${o.amount}</p>
+        <small>${new Date(o.created_at).toLocaleDateString()}</small>
+      </div>
+    </div>`).join('') || '<p style="color:#999;font-style:italic">No orders yet</p>'
+}
+
+// QR
+function renderQR() {
+  const grid = document.getElementById('qrGrid')
+  grid.innerHTML = works.map(w => `<div class="qr-card" id="qr-${w.id}"><canvas id="canvas-${w.id}"></canvas><p>${w.title}</p><small>${w.art_artists?.name||''}</small></div>`).join('')
+  works.forEach(w => {
+    const url = window.location.origin + '/work/' + w.id
+    QRCode.toCanvas(document.getElementById('canvas-' + w.id), url, { width: 80, margin: 1 })
+  })
+}
+
+async function printQR() {
+  const siteUrl = window.location.origin
+  const win = window.open('', '_blank')
+  if (!win) return alert('Please allow popups')
+  const qrs = []
+  for (const w of works) {
+    const url = await new Promise(res => QRCode.toDataURL(siteUrl + '/work/' + w.id, { width: 200, margin: 2 }, (e, d) => res(d)))
+    qrs.push({ url, title: w.title, artist: w.art_artists?.name || '' })
+  }
+  win.document.write(`<!DOCTYPE html><html><head><style>body{font-family:serif;padding:20px}h1{text-align:center;margin-bottom:30px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{text-align:center;border:1px solid #ddd;padding:12px;page-break-inside:avoid}.card img{width:120px;height:120px}.title{font-size:11px;font-weight:bold;margin-top:6px}.artist{font-size:10px;color:#666}@media print{@page{margin:1cm}}</style></head><body><h1>Art Exhibition 2026 — QR Codes</h1><div class="grid">${qrs.map(q=>`<div class="card"><img src="${q.url}"><div class="title">${q.title}</div><div class="artist">${q.artist}</div></div>`).join('')}</div><script>window.onload=()=>window.print()<\/script></body></html>`)
+  win.document.close()
+}
+</script>
+</body>
+</html>

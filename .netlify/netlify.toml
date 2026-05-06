@@ -18,7 +18,6 @@ package = "@netlify/plugin-nextjs"
 publish = "C:\\Users\\User\\.openclaw\\workspace\\artplatform\\.next"
 publishOrigin = "config"
 commandOrigin = "config"
-base = "C:\\Users\\User\\.openclaw\\workspace\\artplatform"
 command = "npm run build"
 
 [build.environment]

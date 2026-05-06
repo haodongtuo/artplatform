@@ -73,6 +73,30 @@
       "namedRegex": "^/admin(?:/)?$"
     },
     {
+      "page": "/api/admin-artist",
+      "regex": "^/api/admin\\-artist(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin\\-artist(?:/)?$"
+    },
+    {
+      "page": "/api/admin-auth",
+      "regex": "^/api/admin\\-auth(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin\\-auth(?:/)?$"
+    },
+    {
+      "page": "/api/admin-logout",
+      "regex": "^/api/admin\\-logout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin\\-logout(?:/)?$"
+    },
+    {
+      "page": "/api/admin-work",
+      "regex": "^/api/admin\\-work(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin\\-work(?:/)?$"
+    },
+    {
       "page": "/api/checkout",
       "regex": "^/api/checkout(?:/)?$",
       "routeKeys": {},

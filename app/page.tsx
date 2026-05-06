@@ -144,7 +144,7 @@ export default async function Home() {
             <div className="md:w-56 grid grid-cols-2 md:grid-cols-1 gap-4">
               {[
                 { num: works.length > 0 ? `${works.length}+` : '—', label: 'Works Available' },
-                { num: artists.length > 0 ? `${artists.length}`, label: 'Artists' },
+                { num: artists.length > 0 ? `${artists.length}` : '—', label: 'Artists' },
                 { num: '1', label: 'Exhibition' },
               ].map(s => (
                 <div key={s.label} className="bg-white rounded-xl p-4 text-center shadow-sm">

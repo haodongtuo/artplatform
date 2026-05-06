@@ -42,15 +42,15 @@ export default async function Home() {
             A Home for Emerging Artists
           </p>
           <h1 className="serif text-5xl md:text-7xl font-light leading-tight mb-8 text-gray-900">
-            Every great artist<br />
-            <span className="italic text-amber-600">had a first canvas.</span>
+            Discover tomorrow's artists<br />
+            <span className="italic text-amber-600">before the gallery does.</span>
           </h1>
           <p className="text-gray-500 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-4">
-            We find them before the world does.
+            Collect original works from emerging university artists.
           </p>
           <p className="text-gray-400 text-base max-w-xl mx-auto leading-relaxed mb-12">
-            Before They Rise is a platform dedicated to the earliest chapters —
-            the student shows, the debut exhibitions, the work made when everything still felt possible.
+            Every artwork comes with verified provenance and artist story —
+            and your purchase goes directly to the artist who made it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -77,18 +77,18 @@ export default async function Home() {
         {[
           {
             icon: '🌱',
-            title: 'Catch the Beginning',
-            body: 'The most honest work happens before the artist learns to perform. We preserve that moment.'
+            title: 'Discover First',
+            body: 'Discover tomorrow\'s artists before the gallery does. The most honest work happens before the world starts watching.'
           },
           {
             icon: '🤝',
-            title: 'Direct from the Artist',
-            body: 'No galleries taking 50%. No intermediaries. You buy directly — and the artist remembers who believed first.'
+            title: 'Support Directly',
+            body: 'Support student artists directly — no galleries, no middlemen. Every dollar goes to the person who made it.'
           },
           {
             icon: '📜',
-            title: 'Provenance from Day One',
-            body: 'Every work comes with a digital certificate. Decades from now, you\'ll have proof you were there.'
+            title: 'Verified Provenance',
+            body: 'Every artwork comes with verified provenance and artist story. Decades from now, you\'ll have proof you were there first.'
           },
         ].map((item) => (
           <div key={item.title} className="px-4">

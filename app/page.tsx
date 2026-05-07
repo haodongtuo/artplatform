@@ -104,11 +104,6 @@ export default async function Home() {
               <img src="/hero-paint.jpg" alt="Paint splash" className="w-full h-full object-cover object-top" />
             </div>
 
-            {/* Small sketch card bottom-right */}
-            <div className="absolute bottom-[12%] right-[2%] w-[26%] h-[34%] rounded-xl overflow-hidden z-20 shadow-md bg-gray-100 border border-gray-200 flex items-center justify-center">
-              <span className="text-3xl opacity-40">✏️</span>
-            </div>
-
             {/* Black squiggly lines (decorative) */}
             <svg className="absolute top-[30%] right-[8%] w-20 h-20 z-10 opacity-25" viewBox="0 0 80 80" fill="none">
               <path d="M10 20 Q20 10 30 20 Q40 30 50 20 Q60 10 70 20" stroke="#111" strokeWidth="2.5" strokeLinecap="round" fill="none"/>

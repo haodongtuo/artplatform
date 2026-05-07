@@ -92,12 +92,10 @@ export default async function Home() {
             <div className="absolute top-[8%] right-[10%] w-44 h-28 opacity-55 pointer-events-none"
               style={{ background: 'radial-gradient(ellipse, #fde047 0%, #fbbf24 70%, transparent 100%)', borderRadius: '45% 55% 40% 60% / 55% 45% 55% 45%', transform: 'rotate(20deg)' }} />
 
-            {/* Circular stamp */}
-            <div className="absolute top-[6%] left-[42%] w-28 h-28 rounded-full border-[1.5px] border-gray-800 flex items-center justify-center z-20 bg-[#f5f5f0]">
-              <div className="text-center">
-                <div className="text-[#6b5fa0] text-xl mb-1">✳</div>
-                <div className="text-[7px] tracking-[0.12em] uppercase text-gray-500 leading-[1.9]">Emerging Today<br />· Collect Tomorrow ·</div>
-              </div>
+            {/* Circular stamp — real emblem */}
+            <div className="absolute top-[6%] left-[42%] w-28 h-28 z-20">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/emblem.svg" alt="Emerging Today · Collect Tomorrow" className="w-full h-full object-contain drop-shadow-sm" />
             </div>
 
             {/* Main paint splash photo */}

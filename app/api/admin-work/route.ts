@@ -7,10 +7,15 @@ const HDR = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type':
 
 export async function POST(req: Request) {
   const cookieStore = await cookies()
-  if (cookieStore.get('admin_auth')?.value !== '1') redirect('/admin')
+  const isSuperAdmin = cookieStore.get('admin_auth')?.value === '1'
+  const schoolAdminRaw = cookieStore.get('school_admin_auth')?.value
+
+  if (!isSuperAdmin && !schoolAdminRaw) redirect('/admin')
 
   const form = await req.formData()
-  const data = {
+  const exhibition_id = form.get('exhibition_id') as string || null
+
+  const data: any = {
     artist_id: form.get('artist_id') as string,
     title: form.get('title') as string,
     description: form.get('description') as string,
@@ -23,10 +28,14 @@ export async function POST(req: Request) {
     status: 'available',
     cert_id: 'CERT-' + Math.random().toString(36).substr(2, 8).toUpperCase(),
   }
+  if (exhibition_id) data.exhibition_id = exhibition_id
 
   await fetch(`${SB_URL}/rest/v1/art_works`, {
     method: 'POST', headers: HDR, body: JSON.stringify(data)
   })
 
+  if (schoolAdminRaw && !isSuperAdmin) {
+    redirect('/school-admin/dashboard')
+  }
   redirect('/admin')
 }

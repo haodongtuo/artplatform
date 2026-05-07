@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import WorkCard from '@/components/WorkCard'
+import ExhibitionScroll from '@/components/ExhibitionScroll'
 import Image from 'next/image'
 
 export const revalidate = 60
@@ -24,8 +25,16 @@ async function getArtists() {
   return data || []
 }
 
+async function getExhibitions() {
+  const { data } = await supabase
+    .from('exhibitions')
+    .select('*')
+    .order('created_at', { ascending: false })
+  return data || []
+}
+
 export default async function Home() {
-  const [works, artists] = await Promise.all([getFeaturedWorks(), getArtists()])
+  const [works, artists, exhibitions] = await Promise.all([getFeaturedWorks(), getArtists(), getExhibitions()])
 
   return (
     <div className="bg-[#FDFAF5]">
@@ -156,6 +165,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Exhibitions Scroll */}
+      <ExhibitionScroll exhibitions={exhibitions} />
 
       {/* Featured Works */}
       {works.length > 0 && (

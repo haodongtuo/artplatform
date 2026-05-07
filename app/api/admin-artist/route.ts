@@ -7,10 +7,17 @@ const HDR = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type':
 
 export async function POST(req: Request) {
   const cookieStore = await cookies()
-  if (cookieStore.get('admin_auth')?.value !== '1') redirect('/admin')
+  const isSuperAdmin = cookieStore.get('admin_auth')?.value === '1'
+  const schoolAdminRaw = cookieStore.get('school_admin_auth')?.value
+
+  if (!isSuperAdmin && !schoolAdminRaw) redirect('/admin')
 
   const form = await req.formData()
-  const data = {
+
+  // exhibition_id: 表单传入（school admin 会在表单里放 hidden input）
+  const exhibition_id = form.get('exhibition_id') as string || null
+
+  const data: any = {
     name: form.get('name') as string,
     school: form.get('school') as string,
     year: form.get('year') as string,
@@ -18,10 +25,15 @@ export async function POST(req: Request) {
     photo_url: form.get('photo_url') as string,
     instagram: form.get('instagram') as string,
   }
+  if (exhibition_id) data.exhibition_id = exhibition_id
 
   await fetch(`${SB_URL}/rest/v1/art_artists`, {
     method: 'POST', headers: HDR, body: JSON.stringify(data)
   })
 
+  // 根据来源重定向
+  if (schoolAdminRaw && !isSuperAdmin) {
+    redirect('/school-admin/dashboard')
+  }
   redirect('/admin')
 }

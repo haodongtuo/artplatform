@@ -10,9 +10,12 @@
   "/api/webhook/route": "app/api/webhook/route.js",
   "/artist/[id]/page": "app/artist/[id]/page.js",
   "/certificate/[cert_id]/page": "app/certificate/[cert_id]/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/gallery/page": "app/gallery/page.js",
+  "/login/page": "app/login/page.js",
   "/page": "app/page.js",
   "/purchase-success/page": "app/purchase-success/page.js",
+  "/register/page": "app/register/page.js",
   "/work/[id]/page": "app/work/[id]/page.js"
 }

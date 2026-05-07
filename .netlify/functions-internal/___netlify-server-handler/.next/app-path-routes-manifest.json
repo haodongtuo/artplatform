@@ -10,9 +10,12 @@
   "/api/webhook/route": "/api/webhook",
   "/artist/[id]/page": "/artist/[id]",
   "/certificate/[cert_id]/page": "/certificate/[cert_id]",
+  "/dashboard/page": "/dashboard",
   "/favicon.ico/route": "/favicon.ico",
   "/gallery/page": "/gallery",
+  "/login/page": "/login",
   "/page": "/",
   "/purchase-success/page": "/purchase-success",
+  "/register/page": "/register",
   "/work/[id]/page": "/work/[id]"
 }

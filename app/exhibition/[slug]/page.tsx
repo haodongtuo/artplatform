@@ -133,15 +133,96 @@ export default async function ExhibitionPage({ params }: { params: Promise<{ slu
         </section>
       )}
 
+      {/* Exhibition Details — How it works, how to join */}
+      <section className="bg-gradient-to-r from-rose-50 via-amber-50 to-yellow-50 border-y border-amber-100 px-6 py-16">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="serif text-3xl font-light text-gray-900 mb-6">How It Works on the Day</h2>
+          <div className="space-y-8 mb-14">
+            {[
+              { step: '01', who: 'For Artists', title: 'Set up your display', body: "Print the QR label from your artist dashboard and attach it to the bottom-right corner of your work. Display your piece near the ceremony — a simple easel is all you need. You don't need to handle any cash or take any payments yourself." },
+              { step: '02', who: 'For Visitors', title: 'Scan the QR code', body: "Anyone with a smartphone can scan the code next to the artwork. No app required — just the camera. It opens directly to the work's page on beforetheyrise.com, with the full story, dimensions, artist bio, and price." },
+              { step: '03', who: 'For Buyers', title: 'Purchase in seconds', body: 'Tap the Buy button. Complete payment securely online. A digital certificate of authenticity is emailed immediately. The artist receives the payment directly.' },
+              { step: '04', who: 'After the Day', title: 'The artwork finds its home', body: "The artist arranges delivery or pickup with the buyer. The certificate lives permanently at beforetheyrise.com, verifiable by anyone. The collection — and the artist's story — begins here." },
+            ].map(item => (
+              <div key={item.step} className="flex gap-6">
+                <div className="flex-shrink-0 w-10 text-right">
+                  <span className="text-xs text-amber-400 font-medium tracking-widest">{item.step}</span>
+                </div>
+                <div className="border-l-2 border-amber-100 pl-6 pb-2">
+                  <p className="text-[10px] text-amber-500 tracking-widest uppercase mb-1">{item.who}</p>
+                  <h3 className="serif text-lg font-medium text-gray-800 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* School permit note */}
+          <div className="bg-white rounded-xl border border-amber-200 p-6 mb-14">
+            <h3 className="serif text-lg font-medium text-gray-800 mb-3">📋 A Note to Artists: Check with Your School First</h3>
+            <p className="text-gray-500 text-sm leading-relaxed mb-3">Before setting up your display at the graduation venue, reach out to your university's event office in advance. Some schools require a simple permit or prior approval.</p>
+            <ul className="text-sm text-gray-500 space-y-2">
+              {['Can graduating students display and sell personal artwork at or near the commencement venue?', 'Is a permit or advance approval required?', 'Are there designated areas for student displays?', 'What are the setup and teardown time windows?'].map(q => (
+                <li key={q} className="flex gap-2"><span className="text-amber-400 mt-0.5">→</span><span>{q}</span></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* How to join */}
+          <h2 className="serif text-3xl font-light text-gray-900 mb-4">How to Join the Exhibition</h2>
+          <p className="text-gray-500 text-base leading-relaxed mb-10">Getting your work onto the platform takes about five minutes.</p>
+          <div className="space-y-10 mb-12">
+            {[
+              { n: 1, title: 'Create your account', body: 'Go to beforetheyrise.com/register and sign up with your email. This is your permanent artist account.' },
+              { n: 2, title: 'Build your artist profile', body: 'Fill in your name, school, graduation year, a short bio, and optionally a photo and Instagram handle.' },
+              { n: 3, title: 'Upload your work', body: 'From your dashboard, click "Add Work". Fill in title, medium, dimensions, description, image, and price (pre-set to $521 — May 21st).' },
+              { n: 4, title: 'Print your QR label', body: 'Click "Print QR Label" next to your work. A printable card appears with the QR code, title, name, and price. Attach it to the bottom-right corner.' },
+              { n: 5, title: 'Show up on graduation day', body: "Bring your work to campus on May 21st. Set it up near the ceremony — an easel is all you need. Buyers scan the QR code and pay online. The payment comes directly to you." },
+            ].map(item => (
+              <div key={item.n} className="flex gap-6">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">{item.n}</div>
+                <div className="pt-1">
+                  <h3 className="serif text-lg font-medium text-gray-800 mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-white rounded-xl border border-amber-100 p-6 mb-14">
+            <p className="text-sm font-medium text-gray-700 mb-2">💡 Tips for a great listing</p>
+            <ul className="text-sm text-gray-500 space-y-1.5">
+              {['Photograph your work in natural daylight — it makes a huge difference.', 'Write your description in first person. Buyers want to hear you, not a press release.', 'Upload before May 15th so your work has time to appear in the gallery before the event.'].map(t => (
+                <li key={t} className="flex gap-2"><span className="text-amber-400">→</span><span>{t}</span></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* $521 */}
+          <div className="text-center py-10 border-t border-amber-100">
+            <p className="text-5xl serif font-light text-amber-600 mb-3">$521</p>
+            <h2 className="serif text-2xl font-light text-gray-800 mb-3">The Price Means Something</h2>
+            <p className="text-gray-500 text-base leading-relaxed max-w-lg mx-auto">
+              Every work in this exhibition is priced at <strong className="text-gray-700">$521</strong> — the date: <strong className="text-gray-700">May 21st</strong>. Graduation day. The price is part of the story.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-gradient-to-br from-amber-400 to-rose-400 text-white py-16 text-center px-6">
         <p className="serif text-2xl md:text-3xl font-light italic mb-6 max-w-xl mx-auto">
           "The best time to collect art is before everyone else knows the name."
         </p>
         <p className="text-amber-100 text-xs tracking-widest uppercase mb-8">Before They Rise</p>
-        <Link href="/gallery" className="inline-block bg-white text-amber-700 px-10 py-3.5 text-sm font-medium tracking-wide hover:bg-amber-50 transition-colors rounded-sm">
-          Browse All Works
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/gallery" className="inline-block bg-white text-amber-700 px-10 py-3.5 text-sm font-medium tracking-wide hover:bg-amber-50 transition-colors rounded-sm">
+            Browse All Works
+          </Link>
+          <Link href="/register" className="inline-block border border-white text-white px-10 py-3.5 text-sm font-medium tracking-wide hover:bg-white hover:text-amber-700 transition-colors rounded-sm">
+            I'm an Artist — Join the Exhibition
+          </Link>
+        </div>
       </section>
     </div>
   )

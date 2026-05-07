@@ -147,6 +147,12 @@ export default async function Home() {
                 >
                   Meet the Artists
                 </Link>
+                <Link
+                  href="/exhibition/la-graduation-2026"
+                  className="inline-block border border-amber-400 text-amber-700 px-8 py-3 text-sm font-medium tracking-wide hover:bg-amber-50 transition-colors rounded-sm"
+                >
+                  Detail →
+                </Link>
               </div>
             </div>
             {/* Stats */}

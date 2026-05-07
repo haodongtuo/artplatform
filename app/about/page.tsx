@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import EventDetailsAccordion from '@/components/EventDetailsAccordion'
 
 export default function AboutPage() {
   return (
@@ -116,12 +115,6 @@ export default function AboutPage() {
             The art world has always had gatekeepers. We're building a door.
           </p>
         </div>
-      </section>
-
-      {/* Current Exhibition — Accordion */}
-      <section className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="serif text-2xl font-light text-gray-900 mb-6">Current Exhibition</h2>
-        <EventDetailsAccordion />
       </section>
 
       {/* CTA */}

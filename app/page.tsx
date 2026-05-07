@@ -101,7 +101,7 @@ export default async function Home() {
 
       {/* Current Exhibition Card — Event, not identity */}
       <section id="current-exhibition" className="max-w-5xl mx-auto px-6 pb-16">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-rose-50 via-amber-50 to-yellow-50 border border-amber-100 p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-rose-100 via-red-50 to-amber-100 border border-rose-200 p-8 md:p-12">
           {/* Confetti dots */}
           <div className="absolute top-4 right-8 text-2xl opacity-30 select-none">🎓</div>
           <div className="absolute bottom-6 right-16 text-xl opacity-20 select-none">✨</div>
@@ -109,7 +109,7 @@ export default async function Home() {
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             <div className="flex-1">
-              <span className="inline-block bg-rose-100 text-rose-600 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-4">
+              <span className="inline-block bg-rose-200 text-rose-700 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-4">
                 Now Open · Class of 2026
               </span>
               <h2 className="serif text-3xl md:text-4xl font-light text-gray-900 mb-3">

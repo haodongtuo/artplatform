@@ -100,9 +100,10 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Main artist painting photo */}
-            <div className="absolute bottom-0 left-[12%] w-[62%] h-[82%] rounded-2xl overflow-hidden z-10 shadow-lg bg-gray-200 flex items-center justify-center">
-              <span className="text-6xl opacity-30">🎨</span>
+            {/* Main paint splash photo */}
+            <div className="absolute bottom-0 left-[12%] w-[62%] h-[82%] rounded-2xl overflow-hidden z-10 shadow-lg">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/hero-paint.jpg" alt="Paint splash" className="w-full h-full object-cover object-top" />
             </div>
 
             {/* Small sketch card bottom-right */}

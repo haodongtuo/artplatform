@@ -27,9 +27,41 @@ export default function RootLayout({
       <body>
         <Nav />
         <main>{children}</main>
-        <footer className="border-t border-gray-200 mt-20 py-10 text-center text-sm text-gray-400">
-          <p className="serif italic">Art Exhibition 2026</p>
-          <p className="mt-1">May 21, 2026</p>
+        <footer style={{ background: '#f5f5f0', borderTop: '1px solid #e5e7eb', padding: '56px 24px 32px' }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '40px', marginBottom: '48px' }}>
+              <div>
+                <p style={{ fontFamily: 'Georgia, serif', fontSize: '20px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>Before They Rise</p>
+                <p style={{ fontSize: '13px', color: '#666', lineHeight: 1.7 }}>A home for emerging artists.<br />A future for original art.</p>
+              </div>
+              <div>
+                <p style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#111', marginBottom: '14px' }}>Explore</p>
+                {[['Artworks', '/gallery'], ['Artists', '/#artists'], ['Exhibitions', '/exhibition/la-graduation-2026']].map(([label, href]) => (
+                  <a key={label} href={href} style={{ display: 'block', fontSize: '13px', color: '#666', textDecoration: 'none', marginBottom: '8px' }}>{label}</a>
+                ))}
+              </div>
+              <div>
+                <p style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#111', marginBottom: '14px' }}>Support</p>
+                {[['About Us', '/about'], ['How It Works', '/about'], ['Artist Login', '/login']].map(([label, href]) => (
+                  <a key={label} href={href} style={{ display: 'block', fontSize: '13px', color: '#666', textDecoration: 'none', marginBottom: '8px' }}>{label}</a>
+                ))}
+              </div>
+              <div>
+                <p style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#111', marginBottom: '14px' }}>Connect</p>
+                {[['Instagram', '#'], ['TikTok', '#'], ['Contact', '/about']].map(([label, href]) => (
+                  <a key={label} href={href} style={{ display: 'block', fontSize: '13px', color: '#666', textDecoration: 'none', marginBottom: '8px' }}>{label}</a>
+                ))}
+              </div>
+            </div>
+            <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+              <p style={{ fontSize: '12px', color: '#9ca3af' }}>© 2026 Before They Rise. All rights reserved.</p>
+              <div style={{ display: 'flex', gap: '24px' }}>
+                {['Terms', 'Privacy'].map(t => (
+                  <a key={t} href="#" style={{ fontSize: '12px', color: '#9ca3af', textDecoration: 'none' }}>{t}</a>
+                ))}
+              </div>
+            </div>
+          </div>
         </footer>
       </body>
     </html>

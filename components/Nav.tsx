@@ -13,19 +13,19 @@ export default function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="serif text-xl font-semibold tracking-wide text-amber-700">
+        <Link href="/" className="serif text-xl font-bold tracking-wide text-gray-900">
           Before They Rise
         </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8 text-sm">
-          <Link href="/gallery" className="text-gray-600 hover:text-black transition-colors">
-            Gallery
-          </Link>
-          <Link href="/#artists" className="text-gray-600 hover:text-black transition-colors">
+          <Link href="/#artists" className="text-gray-600 hover:text-black transition-colors font-medium">
             Artists
           </Link>
-          <Link href="/about" className="text-gray-600 hover:text-black transition-colors">
+          <Link href="/gallery" className="text-gray-600 hover:text-black transition-colors font-medium">
+            Artworks
+          </Link>
+          <Link href="/about" className="text-gray-600 hover:text-black transition-colors font-medium">
             About
           </Link>
           {artistName ? (
@@ -33,7 +33,7 @@ export default function Nav() {
               {artistName}
             </Link>
           ) : (
-            <Link href="/login" className="bg-black text-white px-4 py-1.5 rounded text-xs hover:bg-gray-800 transition-colors">
+            <Link href="/login" className="bg-black text-white px-4 py-1.5 rounded-full text-xs hover:bg-gray-800 transition-colors font-medium">
               Artist Login
             </Link>
           )}

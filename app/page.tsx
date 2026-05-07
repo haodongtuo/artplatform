@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import WorkCard from '@/components/WorkCard'
-import ExhibitionScroll from '@/components/ExhibitionScroll'
 import Image from 'next/image'
 
 export const revalidate = 60
@@ -11,246 +10,198 @@ async function getFeaturedWorks() {
     .from('art_works')
     .select('*, art_artists(*)')
     .eq('status', 'available')
-    .limit(6)
+    .limit(4)
     .order('created_at', { ascending: false })
   return data || []
 }
 
-async function getArtists() {
+async function getNewArtists() {
   const { data } = await supabase
     .from('art_artists')
     .select('*')
-    .limit(8)
-    .order('created_at', { ascending: true })
-  return data || []
-}
-
-async function getExhibitions() {
-  const { data } = await supabase
-    .from('exhibitions')
-    .select('*')
+    .limit(4)
     .order('created_at', { ascending: false })
   return data || []
 }
 
 export default async function Home() {
-  const [works, artists, exhibitions] = await Promise.all([getFeaturedWorks(), getArtists(), getExhibitions()])
+  const [works, newArtists] = await Promise.all([getFeaturedWorks(), getNewArtists()])
 
   return (
-    <div className="bg-[#FDFAF5]">
+    <div style={{ background: '#f5f5f0', minHeight: '100vh' }}>
 
-      {/* Hero — Platform Identity */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#FFF8E7] via-[#FDF3DC] to-[#FCEFD4]">
-        {/* Decorative circles */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-100 opacity-60"></div>
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-rose-100 opacity-40"></div>
-        <div className="absolute top-1/2 left-1/3 w-48 h-48 rounded-full bg-yellow-100 opacity-50"></div>
+      {/* ── HERO ── */}
+      <section style={{ background: '#f5f5f0', padding: '60px 24px 80px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
 
-        <div className="relative max-w-5xl mx-auto px-6 pt-24 pb-20 md:pt-36 md:pb-28 text-center">
-          <p className="text-amber-600 text-xs tracking-[0.4em] uppercase mb-8 font-medium">
-            A Home for Emerging Artists
-          </p>
-          <h1 className="serif text-5xl md:text-7xl font-light leading-tight mb-8 text-gray-900">
-            Discover tomorrow's artists<br />
-            <span className="italic text-amber-600">before the gallery does.</span>
-          </h1>
-          <p className="text-gray-500 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-4">
-            Collect original works from emerging university artists.
-          </p>
-          <p className="text-gray-400 text-base max-w-xl mx-auto leading-relaxed mb-12">
-            Every artwork comes with verified provenance and artist story —
-            and your purchase goes directly to the artist who made it.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/gallery"
-              className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-10 py-3.5 text-sm font-medium tracking-wide transition-colors rounded-sm"
-            >
-              Browse the Collection
-            </Link>
-            <Link
-              href="#current-exhibition"
-              className="inline-block border border-amber-400 text-amber-700 px-10 py-3.5 text-sm font-medium tracking-wide hover:bg-amber-50 transition-colors rounded-sm"
-            >
-              Current Exhibition ↓
-            </Link>
+          {/* Left */}
+          <div>
+            <div style={{ display: 'inline-block', background: '#e8e4f0', color: '#6b5fa0', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', padding: '6px 14px', borderRadius: '20px', marginBottom: '28px' }}>
+              A Home for Emerging Artists
+            </div>
+            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(42px, 6vw, 68px)', fontWeight: 900, lineHeight: 1.05, color: '#111', margin: '0 0 8px' }}>
+              Discover<br />tomorrow's<br />artists
+            </h1>
+            <p style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(38px, 5.5vw, 62px)', fontWeight: 400, fontStyle: 'italic', color: '#d97706', lineHeight: 1.1, margin: '0 0 28px', position: 'relative' }}>
+              before the<br />gallery does.
+              {/* underline accent */}
+              <span style={{ display: 'block', height: '3px', background: '#d97706', borderRadius: '2px', marginTop: '6px', width: '80%' }} />
+            </p>
+            <p style={{ fontSize: '16px', color: '#555', lineHeight: 1.7, maxWidth: '360px', marginBottom: '36px' }}>
+              Collect original works from emerging university artists. Every purchase supports the artist who made it.
+            </p>
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <Link href="/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: '#111', color: 'white', padding: '14px 28px', borderRadius: '40px', fontSize: '14px', fontWeight: 600, textDecoration: 'none' }}>
+                Explore Artworks <span>→</span>
+              </Link>
+              <Link href="/#artists" style={{ fontSize: '14px', color: '#111', fontWeight: 500, textDecoration: 'none', borderBottom: '1px solid #111', paddingBottom: '2px' }}>
+                Meet the Artists
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Wave divider */}
-        <div className="h-12 bg-[#FDFAF5]" style={{ clipPath: 'ellipse(55% 100% at 50% 100%)' }}></div>
-      </section>
-
-      {/* Philosophy strip */}
-      <section className="max-w-5xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12 text-center">
-        {[
-          {
-            icon: '🌱',
-            title: 'Discover First',
-            body: 'Discover tomorrow\'s artists before the gallery does. The most honest work happens before the world starts watching.'
-          },
-          {
-            icon: '🤝',
-            title: 'Support Directly',
-            body: 'Support student artists directly — no galleries, no middlemen. Every dollar goes to the person who made it.'
-          },
-          {
-            icon: '📜',
-            title: 'Verified Provenance',
-            body: 'Every artwork comes with verified provenance and artist story. Decades from now, you\'ll have proof you were there first.'
-          },
-        ].map((item) => (
-          <div key={item.title} className="px-4">
-            <div className="text-3xl mb-4">{item.icon}</div>
-            <h3 className="serif text-lg font-medium mb-3 text-gray-800">{item.title}</h3>
-            <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
-          </div>
-        ))}
-      </section>
-
-      {/* Current Exhibition Card — Event, not identity */}
-      <section id="current-exhibition" className="max-w-5xl mx-auto px-6 pb-16">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-rose-100 via-red-50 to-amber-100 border border-rose-200 p-8 md:p-12">
-          {/* Confetti dots */}
-          <div className="absolute top-4 right-8 text-2xl opacity-30 select-none">🎓</div>
-          <div className="absolute bottom-6 right-16 text-xl opacity-20 select-none">✨</div>
-          <div className="absolute top-10 right-32 text-lg opacity-20 select-none">🎨</div>
-
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <div className="flex-1">
-              <span className="inline-block bg-rose-200 text-rose-700 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-4">
-                Now Open · Class of 2026
-              </span>
-              <h2 className="serif text-3xl md:text-4xl font-light text-gray-900 mb-3">
-                Cal State Fullerton — Graduation Exhibition 2026
-              </h2>
-              <p className="text-gray-500 text-base leading-relaxed mb-6 max-w-lg">
-                Original works by this year's graduating students at California State University, Fullerton —
-                paintings, drawings, mixed media, and more.
-                Each piece carries the energy of a beginning.
-              </p>
-              <div className="flex flex-wrap gap-6 text-sm text-gray-500 mb-8">
-                <span>📅 &nbsp;May 21, 2026</span>
-                <span>🎨 &nbsp;Up to 50 artists</span>
-                <span>🖼️ &nbsp;Original works only</span>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/gallery"
-                  className="inline-block bg-gray-900 hover:bg-gray-700 text-white px-8 py-3 text-sm font-medium tracking-wide transition-colors rounded-sm"
-                >
-                  View All Works
-                </Link>
-                <Link
-                  href="#artists"
-                  className="inline-block border border-gray-300 text-gray-600 px-8 py-3 text-sm font-medium tracking-wide hover:border-gray-500 transition-colors rounded-sm"
-                >
-                  Meet the Artists
-                </Link>
-                <Link
-                  href="/exhibition/la-graduation-2026"
-                  className="inline-block border border-amber-400 text-amber-700 px-8 py-3 text-sm font-medium tracking-wide hover:bg-amber-50 transition-colors rounded-sm"
-                >
-                  Detail →
-                </Link>
+          {/* Right — decorative collage */}
+          <div style={{ position: 'relative', height: '480px' }}>
+            {/* Main circle stamp */}
+            <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', width: '110px', height: '110px', borderRadius: '50%', border: '1.5px solid #111', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '20px', color: '#6b5fa0' }}>✳</div>
+                <div style={{ fontSize: '8px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#555', lineHeight: 1.8 }}>Emerging Today<br />Collect Tomorrow</div>
               </div>
             </div>
-            {/* Stats */}
-            <div className="md:w-56 grid grid-cols-2 md:grid-cols-1 gap-4">
+            {/* Paint splash blobs */}
+            <div style={{ position: 'absolute', top: 0, right: '10%', width: '160px', height: '120px', background: 'linear-gradient(135deg, #fbbf24 0%, #f87171 100%)', borderRadius: '60% 40% 70% 30% / 50% 60% 40% 50%', opacity: 0.35, zIndex: 0 }} />
+            <div style={{ position: 'absolute', top: '40px', right: '20%', width: '100px', height: '80px', background: '#a78bfa', borderRadius: '40% 60% 30% 70% / 60% 30% 70% 40%', opacity: 0.25, zIndex: 0 }} />
+            {/* Artist photo placeholder */}
+            <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', width: '280px', height: '360px', background: 'linear-gradient(160deg, #e5e7eb 0%, #d1d5db 100%)', borderRadius: '12px', overflow: 'hidden', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ textAlign: 'center', color: '#9ca3af' }}>
+                <div style={{ fontSize: '48px', marginBottom: '8px' }}>🎨</div>
+                <div style={{ fontSize: '12px' }}>Artist at work</div>
+              </div>
+            </div>
+            {/* Small sketch thumbnail */}
+            <div style={{ position: 'absolute', bottom: '60px', right: '4%', width: '90px', height: '110px', background: '#f3f4f6', borderRadius: '8px', border: '1px solid #e5e7eb', zIndex: 3, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+              <span style={{ fontSize: '28px' }}>✏️</span>
+            </div>
+            {/* Yellow dot */}
+            <div style={{ position: 'absolute', top: '180px', left: '8%', width: '14px', height: '14px', borderRadius: '50%', background: '#fbbf24', zIndex: 2 }} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURED ARTWORKS ── */}
+      <section style={{ background: 'white', padding: '64px 24px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '32px' }}>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '28px', fontWeight: 700, color: '#111', margin: 0 }}>Featured Artworks</h2>
+            <Link href="/gallery" style={{ fontSize: '13px', color: '#6b5fa0', textDecoration: 'none', borderBottom: '1px solid #6b5fa0', paddingBottom: '1px' }}>View all</Link>
+          </div>
+
+          {works.length > 0 ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+              {works.map(work => (
+                <WorkCard key={work.id} work={work} />
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '80px 0', color: '#9ca3af' }}>
+              <p style={{ fontFamily: 'Georgia, serif', fontSize: '20px', fontStyle: 'italic' }}>Works coming soon</p>
+              <p style={{ fontSize: '13px', marginTop: '8px' }}>Check back closer to May 21, 2026</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── WHY IT MATTERS + NEW ARTISTS ── */}
+      <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '340px' }}>
+
+        {/* Left — Why It Matters (dark) */}
+        <div style={{ background: '#111', color: 'white', padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+              <div style={{ width: '44px', height: '44px', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '18px' }}>✦</span>
+              </div>
+              <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '28px', fontWeight: 400, fontStyle: 'italic', margin: 0 }}>Why It Matters</h2>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {[
-                { num: works.length > 0 ? `${works.length}+` : '—', label: 'Works Available' },
-                { num: artists.length > 0 ? `${artists.length}` : '—', label: 'Artists' },
-                { num: '1', label: 'Exhibition' },
-              ].map(s => (
-                <div key={s.label} className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="serif text-2xl font-light text-amber-600">{s.num}</div>
-                  <div className="text-xs text-gray-400 mt-1">{s.label}</div>
+                { color: '#f87171', text: 'Verified artists & provenance' },
+                { color: '#60a5fa', text: 'Direct support to artists' },
+                { color: '#34d399', text: 'Affordable original art' },
+                { color: '#fbbf24', text: 'Stories that connect you to the creative journey' },
+              ].map(item => (
+                <li key={item.text} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', fontSize: '15px', color: 'rgba(255,255,255,0.85)' }}>
+                  <span style={{ width: '24px', height: '3px', background: item.color, borderRadius: '2px', marginTop: '9px', flexShrink: 0 }} />
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Link href="/about" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', border: '1.5px solid white', color: 'white', padding: '12px 24px', borderRadius: '40px', fontSize: '13px', fontWeight: 600, textDecoration: 'none', width: 'fit-content' }}>
+            Learn More <span>→</span>
+          </Link>
+        </div>
+
+        {/* Right — New Artists Every Month (purple) */}
+        <div style={{ background: '#a78bfa', padding: '56px 48px', position: 'relative', overflow: 'hidden' }}>
+          {/* Decorative brush stroke */}
+          <div style={{ position: 'absolute', right: '-20px', top: '20px', fontSize: '80px', opacity: 0.15, transform: 'rotate(-20deg)', lineHeight: 1 }}>〰</div>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '32px', fontWeight: 700, color: 'white', lineHeight: 1.2, marginBottom: '12px' }}>
+            New Artists<br />Every Month
+          </h2>
+          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.85)', marginBottom: '32px', lineHeight: 1.6 }}>
+            We spotlight fresh talent from universities around the world.
+          </p>
+
+          {/* Artist avatars */}
+          <div id="artists" style={{ display: 'flex', gap: '12px', marginBottom: '28px' }}>
+            {newArtists.length > 0 ? newArtists.map(artist => (
+              <Link key={artist.id} href={`/artist/${artist.id}`} style={{ textDecoration: 'none' }}>
+                <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', background: 'rgba(255,255,255,0.3)', border: '2px solid rgba(255,255,255,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {artist.photo_url ? (
+                    <Image src={artist.photo_url} alt={artist.name} width={54} height={54} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                  ) : (
+                    <span style={{ fontFamily: 'Georgia, serif', fontSize: '20px', color: 'white', fontWeight: 300 }}>{artist.name.charAt(0)}</span>
+                  )}
                 </div>
-              ))}
-            </div>
+              </Link>
+            )) : (
+              [1,2,3,4].map(i => (
+                <div key={i} style={{ width: '54px', height: '54px', borderRadius: '50%', background: 'rgba(255,255,255,0.25)', border: '2px solid rgba(255,255,255,0.4)' }} />
+              ))
+            )}
           </div>
+
+          <Link href="/gallery" style={{ fontSize: '14px', color: 'white', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.6)', paddingBottom: '2px', fontWeight: 500 }}>
+            See all artists →
+          </Link>
         </div>
       </section>
 
-      {/* Exhibitions Scroll */}
-      <ExhibitionScroll exhibitions={exhibitions} />
-
-      {/* Featured Works */}
-      {works.length > 0 && (
-        <section className="max-w-5xl mx-auto px-6 pb-16">
-          <div className="flex items-end justify-between mb-8">
-            <h2 className="serif text-3xl font-light text-gray-900">From This Exhibition</h2>
-            <Link href="/gallery" className="text-sm text-amber-600 hover:text-amber-700 border-b border-amber-300 hover:border-amber-500 transition-colors pb-0.5">
-              See all works →
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {works.map((work) => (
-              <WorkCard key={work.id} work={work} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {works.length === 0 && (
-        <section className="max-w-5xl mx-auto px-6 pb-16 text-center py-16">
-          <div className="serif text-2xl text-gray-300 italic">Works coming soon</div>
-          <p className="text-gray-400 mt-4 text-sm">Check back closer to the exhibition date — May 21, 2026</p>
-        </section>
-      )}
-
-      {/* Artists */}
-      {artists.length > 0 && (
-        <section id="artists" className="bg-gradient-to-b from-[#FDFAF5] to-amber-50 py-16">
-          <div className="max-w-5xl mx-auto px-6">
-            <h2 className="serif text-3xl font-light mb-2 text-gray-900">The Class of 2026</h2>
-            <p className="text-gray-400 text-sm mb-10">The artists you'll want to say you knew first.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {artists.map((artist) => (
-                <Link key={artist.id} href={`/artist/${artist.id}`} className="group text-center">
-                  <div className="relative w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-amber-100 ring-2 ring-transparent group-hover:ring-amber-300 transition-all duration-300">
-                    {artist.photo_url ? (
-                      <Image src={artist.photo_url} alt={artist.name} fill className="object-cover group-hover:scale-110 transition-transform duration-300" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-2xl text-amber-400 serif font-light">
-                        {artist.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  <h3 className="serif font-medium text-sm text-gray-800 group-hover:text-amber-600 transition-colors">{artist.name}</h3>
-                  <p className="text-xs text-gray-400 mt-0.5">{artist.year || artist.school}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* How it works */}
-      <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <h2 className="serif text-3xl font-light mb-3 text-gray-900">How to Purchase</h2>
-        <p className="text-gray-400 text-sm mb-14">Simple, direct, and done in under a minute.</p>
-        <div className="grid md:grid-cols-3 gap-10 text-left">
-          {[
-            { step: '01', title: 'Find the Work', desc: 'Browse online or scan the QR code next to any artwork at the physical exhibition.' },
-            { step: '02', title: 'Buy Directly', desc: 'Complete your purchase securely in seconds. The artist gets paid directly — no middleman.' },
-            { step: '03', title: 'Own a Beginning', desc: 'Your certificate of authenticity arrives by email. You were here at the start.' },
-          ].map((item) => (
-            <div key={item.step} className="relative pl-6 border-l-2 border-amber-200">
-              <div className="text-xs text-amber-400 font-medium tracking-widest mb-2">{item.step}</div>
-              <h3 className="serif font-medium text-lg mb-2 text-gray-800">{item.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+      {/* ── SUBSCRIBE ── */}
+      <section style={{ background: 'white', padding: '72px 24px' }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '32px', fontWeight: 700, color: '#111', marginBottom: '8px' }}>
+            Be the first to discover
+          </h2>
+          <p style={{ fontSize: '15px', color: '#666', marginBottom: '32px' }}>
+            New artists. New works. Straight to your inbox.
+          </p>
+          <form style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              style={{ flex: '1', minWidth: '240px', maxWidth: '360px', padding: '14px 20px', border: '1.5px solid #e5e7eb', borderRadius: '40px', fontSize: '14px', outline: 'none' }}
+            />
+            <button
+              type="submit"
+              style={{ background: '#111', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '40px', fontSize: '14px', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
-      </section>
-
-      {/* Closing quote */}
-      <section className="bg-gradient-to-br from-amber-400 to-rose-400 text-white py-20 text-center px-6">
-        <p className="serif text-3xl md:text-4xl font-light italic max-w-2xl mx-auto leading-relaxed mb-6">
-          "The best time to collect art is before everyone else knows the name."
-        </p>
-        <p className="text-amber-100 text-sm tracking-widest uppercase">Before They Rise</p>
       </section>
 
     </div>

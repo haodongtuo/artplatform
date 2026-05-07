@@ -111,10 +111,22 @@ export default async function WorkPage({ params }: { params: Promise<{ id: strin
             </Link>
           )}
 
-          {/* QR Code */}
+          {/* QR Code + Print */}
           <div className="mt-10 pt-8 border-t border-gray-100">
             <p className="text-xs text-gray-400 mb-3 uppercase tracking-wide">Scan to share this artwork</p>
             <QRCodeDisplay url={workUrl} title={work.title} artist={artist?.name} />
+            <div className="mt-4">
+              <Link
+                href={`/work/${work.id}/print`}
+                target="_blank"
+                className="inline-flex items-center gap-2 text-xs text-amber-600 hover:text-amber-700 border border-amber-200 hover:border-amber-400 px-4 py-2 rounded-sm transition-colors"
+              >
+                🖨️ Print QR Label for Exhibition
+              </Link>
+              <p className="text-[10px] text-gray-400 mt-2 leading-relaxed max-w-xs">
+                Print and attach to the bottom-right corner of your artwork. Visitors scan to view details and purchase instantly.
+              </p>
+            </div>
           </div>
         </div>
       </div>

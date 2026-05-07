@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-const SB_URL = 'https://mymezahwaaxunxaxqshe.supabase.co'
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15bWV6YWh3YWF4dW54YXhxc2hlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjAwNDMsImV4cCI6MjA4OTMzNjA0M30.NKq1a9aD3QT2m3T5Sz8SWCYfivXBrGMEUiG0GRJL_cQ'
+const SB_URL = 'https://bdwfrstysliwvbbualgd.supabase.co'
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkd2Zyc3R5c2xpd3ZiYnVhbGdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODM5NzAsImV4cCI6MjA5MzY1OTk3MH0.GJb_AjV6xv8Rpy-lCuXiSl3bStViGQk36EEU9MmisvU'
 
 export default function RegisterPage() {
   const router = useRouter()

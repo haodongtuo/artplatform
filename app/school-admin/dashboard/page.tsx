@@ -88,9 +88,20 @@ export default async function SchoolDashboard() {
 
       {/* Add Artist */}
       <div style={s.section}>
-        <h2 style={s.h2}>Add Artist</h2>
-        <form method="POST" action="/api/admin-artist">
+        <h2 style={s.h2}>Add Artist + Login Account</h2>
+        <p style={{ fontSize: '12px', color: '#999', marginBottom: '12px' }}>Fill in email and password — the artist can log in with these credentials.</p>
+        <form method="POST" action="/api/admin-create-artist-account">
           <input type="hidden" name="exhibition_id" value={exhibition_id} />
+          <div style={{ ...s.grid2, marginBottom: '0' }}>
+            <div>
+              <label style={s.label}>Login Email *</label>
+              <input style={s.input} name="email" type="email" required placeholder="artist@email.com" />
+            </div>
+            <div>
+              <label style={s.label}>Initial Password *</label>
+              <input style={s.input} name="password" type="text" required placeholder="Min 6 characters" />
+            </div>
+          </div>
           <div style={s.grid2}>
             <div style={s.full}>
               <label style={s.label}>Name *</label>
@@ -117,7 +128,7 @@ export default async function SchoolDashboard() {
               <input style={s.input} name="instagram" />
             </div>
           </div>
-          <button style={s.btn} type="submit">Save Artist</button>
+          <button style={s.btn} type="submit">Save Artist + Create Login</button>
         </form>
       </div>
 

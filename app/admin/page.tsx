@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import ExhibitionEditRow from '@/components/ExhibitionEditRow'
 
 const PWD = 'art2026admin'
 const SB_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -106,14 +107,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <div className="section-highlight">
             <h2>🌍 Exhibitions</h2>
             {(exhibitions as any[]).map((ex: any) => (
-              <div className="row" key={ex.id}>
-                <div style={{ flex: 1 }}>
-                  <p>{ex.name}</p>
-                  <small>{ex.school} · {ex.city}, {ex.country} {ex.date ? `· ${ex.date}` : ''}</small>
-                </div>
-                <span className={`badge ${ex.status}`}>{ex.status}</span>
-                <code style={{ fontSize: '11px', color: '#999' }}>/exhibition/{ex.slug}</code>
-              </div>
+              <ExhibitionEditRow key={ex.id} ex={ex} />
             ))}
 
             <div className="divider" />
@@ -206,10 +200,29 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
           {/* ── ARTISTS ── */}
           <div className="section">
-            <h2>Add Artist (LA 2026)</h2>
-            <form method="POST" action="/api/admin-artist">
-              <input type="hidden" name="exhibition_id" value={(exhibitions as any[]).find((e: any) => e.slug === 'la-graduation-2026')?.id || ''} />
-              <div className="grid2">
+            <h2>Add Artist + Login Account</h2>
+            <p style={{ fontSize: '12px', color: '#999', marginBottom: '12px' }}>填写邮箱和密码，系统会同时创建艺术家档案和登录账号，把邮箱密码发给艺术家即可。</p>
+            <form method="POST" action="/api/admin-create-artist-account">
+              <div className="grid3">
+                <div>
+                  <label>Exhibition *</label>
+                  <select name="exhibition_id" required>
+                    <option value="">Select exhibition…</option>
+                    {(exhibitions as any[]).map((ex: any) => (
+                      <option key={ex.id} value={ex.id}>{ex.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label>Login Email *</label>
+                  <input name="email" type="email" required placeholder="artist@email.com" />
+                </div>
+                <div>
+                  <label>Initial Password *</label>
+                  <input name="password" type="text" required placeholder="Min 6 characters" />
+                </div>
+              </div>
+              <div className="grid2" style={{ marginTop: '0' }}>
                 <div className="full">
                   <label>Name *</label>
                   <input name="name" required />
@@ -235,15 +248,23 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   <input name="instagram" />
                 </div>
               </div>
-              <button className="btn" type="submit">Save Artist</button>
+              <button className="btn" type="submit">Save Artist + Create Login</button>
             </form>
           </div>
 
           {/* ── WORKS ── */}
           <div className="section">
-            <h2>Add Work (LA 2026)</h2>
+            <h2>Add Work</h2>
             <form method="POST" action="/api/admin-work">
-              <input type="hidden" name="exhibition_id" value={(exhibitions as any[]).find((e: any) => e.slug === 'la-graduation-2026')?.id || ''} />
+              <div style={{ marginBottom: '12px' }}>
+                <label>Exhibition *</label>
+                <select name="exhibition_id" required>
+                  <option value="">Select exhibition…</option>
+                  {(exhibitions as any[]).map((ex: any) => (
+                    <option key={ex.id} value={ex.id}>{ex.name}</option>
+                  ))}
+                </select>
+              </div>
               <div className="grid2">
                 <div>
                   <label>Artist *</label>

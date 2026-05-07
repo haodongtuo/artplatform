@@ -2,8 +2,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 const PWD = 'art2026admin'
-const SB_URL = 'https://mymezahwaaxunxaxqshe.supabase.co'
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15bWV6YWh3YWF4dW54YXhxc2hlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjAwNDMsImV4cCI6MjA4OTMzNjA0M30.NKq1a9aD3QT2m3T5Sz8SWCYfivXBrGMEUiG0GRJL_cQ'
+const SB_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const SB_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
 const HDR = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' }
 
 async function get(table: string, select = '*') {
@@ -163,8 +163,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   <input name="height_cm" type="number" />
                 </div>
                 <div>
-                  <label>Price (USD)</label>
-                  <input name="price" type="number" />
+                  <label>Price (USD) — May 21 = $521</label>
+                  <input name="price" type="number" defaultValue="521" />
                 </div>
                 <div className="full">
                   <label>Image URL</label>
@@ -200,6 +200,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
                   <small>{w.art_artists?.name} · {w.medium} · ${w.price}</small>
                 </div>
                 <span className="badge">{w.status}</span>
+                <a href={`/work/${w.id}/print`} target="_blank" style={{ fontSize: '12px', color: '#d97706', textDecoration: 'none', whiteSpace: 'nowrap' }}>🖨️ Print QR</a>
               </div>
             ))}
           </div>

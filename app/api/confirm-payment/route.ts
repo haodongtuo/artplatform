@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
     // Send certificate email
     await resend.emails.send({
-      from: 'Before They Rise <noreply@beforetheyrise.com>',
+      from: 'Before They Rise <noreply@bighongshu.com>',
       to: buyerEmail,
       subject: `Your Certificate of Authenticity — ${work.title}`,
       html: `

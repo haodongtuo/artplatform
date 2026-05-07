@@ -143,6 +143,112 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* How to Register & Upload */}
+      <section className="bg-gray-50 border-y border-gray-100 py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <span className="inline-block bg-amber-100 text-amber-700 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-6">
+            For Artists
+          </span>
+          <h2 className="serif text-3xl font-light text-gray-900 mb-4">How to Join the Exhibition</h2>
+          <p className="text-gray-500 text-base leading-relaxed mb-12">
+            Getting your work onto the platform takes about five minutes. Here's exactly what to do.
+          </p>
+
+          <div className="space-y-10">
+            {/* Step 1 */}
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">1</div>
+              <div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Create your account</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-3">
+                  Go to <strong className="text-gray-700">beforetheyrise.com/register</strong> and sign up with your email address.
+                  This is your permanent artist account — you'll use it to manage your works, view orders, and access your QR labels.
+                </p>
+                <Link href="/register" className="inline-block text-xs bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-sm transition-colors">
+                  Register Now →
+                </Link>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">2</div>
+              <div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Build your artist profile</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  After registering, fill in your name, school, graduation year, a short bio, and optionally a photo and Instagram handle.
+                  This is what buyers see when they tap your name — make it feel like you.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">3</div>
+              <div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Upload your work</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-3">
+                  From your dashboard, click <strong className="text-gray-700">"Add Work"</strong> and fill in the details:
+                </p>
+                <ul className="text-sm text-gray-500 space-y-1.5 pl-0">
+                  {[
+                    { field: 'Title', note: 'The name of the piece' },
+                    { field: 'Medium', note: 'e.g. Oil on canvas, Watercolor, Charcoal' },
+                    { field: 'Dimensions', note: 'Width × Height in cm' },
+                    { field: 'Year', note: '2026' },
+                    { field: 'Description', note: 'A few sentences about the work — what inspired it, what it means to you' },
+                    { field: 'Image', note: 'A clear photo of the work (good natural lighting, no shadows)' },
+                    { field: 'Price', note: 'Pre-set to $521 — the date, May 21st, graduation day' },
+                  ].map(item => (
+                    <li key={item.field} className="flex gap-2">
+                      <span className="text-amber-400">→</span>
+                      <span><strong className="text-gray-700">{item.field}:</strong> {item.note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">4</div>
+              <div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Print your QR label</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Once your work is saved, go to your dashboard and click <strong className="text-gray-700">"Print QR Label"</strong> next to the work.
+                  A printable card will appear — it includes the QR code, your work's title, your name, and the price.
+                  Print it, cut it out, and attach it to the <strong className="text-gray-700">bottom-right corner</strong> of your artwork.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 5 */}
+            <div className="flex gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">5</div>
+              <div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Show up on graduation day</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Bring your work to campus on May 21st. Set it up near the ceremony — an easel is all you need.
+                  You don't need to handle payments. Anyone who wants to buy simply scans the QR code on their phone and completes the purchase online.
+                  You'll receive a notification, and the payment comes directly to you.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tip box */}
+          <div className="mt-12 bg-white rounded-xl border border-amber-100 p-6">
+            <p className="text-sm font-medium text-gray-700 mb-2">💡 Tips for a great listing</p>
+            <ul className="text-sm text-gray-500 space-y-1.5">
+              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Photograph your work in natural daylight — it makes a huge difference.</span></li>
+              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Write your description in first person. Buyers want to hear <em>you</em>, not a press release.</span></li>
+              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Upload before May 15th so your work has time to appear in the gallery before the event.</span></li>
+              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Check with your school about setting up near the commencement venue — most are supportive, but confirm in advance.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Why $521 */}
       <section className="bg-amber-50 border-y border-amber-100 py-16 px-6 text-center">
         <div className="max-w-xl mx-auto">

@@ -13,8 +13,8 @@ export default function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="serif text-xl font-semibold tracking-wide">
-          Art <span className="text-gray-400 text-sm font-light">2026</span>
+        <Link href="/" className="serif text-xl font-semibold tracking-wide text-amber-700">
+          Before They Rise
         </Link>
 
         {/* Desktop */}
@@ -24,6 +24,9 @@ export default function Nav() {
           </Link>
           <Link href="/#artists" className="text-gray-600 hover:text-black transition-colors">
             Artists
+          </Link>
+          <Link href="/about" className="text-gray-600 hover:text-black transition-colors">
+            About
           </Link>
           {artistName ? (
             <Link href="/dashboard" className="text-black font-medium hover:text-gray-600 transition-colors">
@@ -52,6 +55,7 @@ export default function Nav() {
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-4 text-sm">
           <Link href="/gallery" onClick={() => setOpen(false)}>Gallery</Link>
           <Link href="/#artists" onClick={() => setOpen(false)}>Artists</Link>
+          <Link href="/about" onClick={() => setOpen(false)}>About</Link>
           {artistName ? (
             <Link href="/dashboard" onClick={() => setOpen(false)}>My Dashboard</Link>
           ) : (

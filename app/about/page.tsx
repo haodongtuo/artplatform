@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import EventDetailsAccordion from '@/components/EventDetailsAccordion'
 
 export default function AboutPage() {
   return (
@@ -11,278 +12,116 @@ export default function AboutPage() {
           Before They Rise
         </h1>
         <p className="text-gray-500 text-xl font-light max-w-2xl mx-auto leading-relaxed">
-          A platform for collecting original art from emerging university students —
-          at the exact moment their career begins.
+          A platform built for art students — especially those on the edge of graduation,
+          standing at the moment when everything is about to change.
         </p>
       </section>
 
-      {/* What is this */}
+      {/* Mission */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <h2 className="serif text-3xl font-light text-gray-900 mb-6">What is Before They Rise?</h2>
         <div className="space-y-5 text-gray-600 leading-relaxed text-base">
           <p>
-            <strong className="text-gray-900">Before They Rise</strong> is an online platform dedicated to the earliest chapter of an artist's career.
-            We showcase and sell original works created by graduating university art students — before the galleries
-            discover them, before the prices climb, and before the world catches on.
+            <strong className="text-gray-900">Before They Rise</strong> is an online platform dedicated to art students —
+            especially those approaching graduation, standing at the moment when everything is about to change.
           </p>
           <p>
-            Every piece on this platform is an original work. Every artist is at the very beginning.
-            Every purchase comes with a verified digital certificate of authenticity, documenting the artist's name,
-            school, the work's dimensions, medium, and the date it entered its first collection.
+            We believe that some of the most exciting art in the world is being made right now, in university
+            studios, by students whose names you don't yet know.
           </p>
           <p>
-            This is not a gallery. There are no commissions taken from artists. No middlemen.
-            When you buy a work, 100% of the payment goes directly to the student who created it.
+            Our mission is simple: give them a real audience, before the world catches up.
+          </p>
+          <p>
+            Every work listed on Before They Rise comes with an <strong className="text-gray-900">NFT certificate</strong> —
+            a permanent, verifiable record tied to the piece and its creator. Not a gimmick. A proof of origin.
+            When you buy here, you're not just buying a painting. You're documenting a beginning.
           </p>
         </div>
       </section>
 
-      {/* The Event — Graduation Day */}
-      <section className="bg-gradient-to-r from-rose-50 via-amber-50 to-yellow-50 border-y border-amber-100 py-20 px-6">
+      {/* How It Works */}
+      <section className="bg-gray-50 border-y border-gray-100 py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <span className="inline-block bg-rose-200 text-rose-700 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-6">
-            Class of 2026 · Graduation Day
-          </span>
-          <h2 className="serif text-3xl font-light text-gray-900 mb-6">
-            The Exhibition: May 21, 2026
-          </h2>
-          <div className="space-y-5 text-gray-600 leading-relaxed text-base">
-            <p>
-              On graduation day, participating artists will display their works <strong className="text-gray-900">in person on campus</strong> —
-              ideally set up around the perimeter of the commencement venue, in the outdoor areas where
-              families naturally gather before and after the ceremony.
-            </p>
-            <p>
-              Imagine this: you've just watched your daughter walk across the stage. You're standing
-              outside with flowers, waiting. And right there, a few feet away, is a painting she made —
-              and next to it, a small card with a QR code.
-            </p>
-            <p>
-              You scan it. You see the full story. You buy it. It ships to your home.
-              And twenty years from now, it's hanging in your living room.
-            </p>
-            <p>
-              Parents, grandparents, siblings, and friends attending commencement are the natural audience.
-              They're already emotional. They already want to celebrate. They already want to bring something home.
-            </p>
-          </div>
-
-          {/* Callout box */}
-          <div className="mt-10 bg-white rounded-xl border border-amber-200 p-6">
-            <h3 className="serif text-lg font-medium text-gray-800 mb-3">📋 A Note to Artists: Check with Your School First</h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-4">
-              Before setting up your display at the graduation venue, we strongly recommend reaching out
-              to your university's event office or student affairs department in advance.
-              Some schools require a simple permit or prior approval for any commercial activity on campus —
-              even informal student art sales.
-            </p>
-            <p className="text-gray-500 text-sm leading-relaxed mb-4">
-              Here's what to ask:
-            </p>
-            <ul className="text-sm text-gray-500 space-y-2 list-none pl-0">
-              {[
-                'Can graduating students display and sell personal artwork at or near the commencement venue?',
-                'Is a permit or advance approval required for this?',
-                'Are there designated areas for student displays?',
-                'What are the setup and teardown time windows?',
-              ].map((q) => (
-                <li key={q} className="flex gap-2">
-                  <span className="text-amber-400 mt-0.5">→</span>
-                  <span>{q}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-gray-400 text-xs mt-4 italic">
-              Most schools are supportive of student initiatives like this — it just takes one email or phone call to confirm.
-            </p>
+          <h2 className="serif text-3xl font-light text-gray-900 mb-10">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-10">
+            {[
+              {
+                icon: '🎨',
+                title: 'Curated Online Exhibitions',
+                body: 'We organize themed shows — "LA Emerging Artists Top 30", "Graduation Show Picks", "Under $500 Collection", "Photography Students to Watch" — so buyers don\'t need to search. They discover.'
+              },
+              {
+                icon: '📍',
+                title: 'Offline Pop-up Shows',
+                body: 'Monthly events in cafés, galleries, hotel lobbies, and co-working spaces. The platform handles the purchase and the certificate. The pop-up handles the trust and the experience.'
+              },
+              {
+                icon: '🏫',
+                title: 'Student Organizations',
+                body: 'We work with student groups at art schools city by city — each one a local team, a local voice, a local show. Starting in Los Angeles, growing from there.'
+              },
+            ].map(item => (
+              <div key={item.title} className="text-center px-2">
+                <div className="text-3xl mb-4">{item.icon}</div>
+                <h3 className="serif text-lg font-medium text-gray-800 mb-3">{item.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
+      {/* Who Buys Here */}
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="serif text-3xl font-light text-gray-900 mb-10">How It Works on the Day</h2>
-        <div className="space-y-8">
+        <h2 className="serif text-3xl font-light text-gray-900 mb-10">Who Buys Here</h2>
+        <div className="space-y-6">
           {[
             {
-              step: '01',
-              who: 'For Artists',
-              title: 'Set up your display',
-              body: 'Print the QR label from your artist dashboard and attach it to the bottom-right corner of your work. Display your piece near the ceremony — a simple easel is all you need. You don\'t need to handle any cash or take any payments yourself.'
+              label: 'Young Professionals',
+              desc: 'Lawyers, designers, tech employees, real estate agents, doctors — people who want something real on their walls, with a story behind it.',
+              emoji: '💼'
             },
             {
-              step: '02',
-              who: 'For Visitors',
-              title: 'Scan the QR code',
-              body: 'Anyone with a smartphone can scan the code next to the artwork. No app required — just the camera. It opens directly to the work\'s page on beforetheyrise.com, with the full story, dimensions, artist bio, and price.'
+              label: 'Spaces',
+              desc: 'Cafés, restaurants, boutique hotels, co-working spaces, clinics — places looking for art that carries meaning and provenance, not just decoration.',
+              emoji: '🏢'
             },
             {
-              step: '03',
-              who: 'For Buyers',
-              title: 'Purchase in seconds',
-              body: 'Tap the Buy button. Complete payment securely online. A digital certificate of authenticity is emailed immediately. The artist receives the payment directly.'
+              label: 'Families',
+              desc: 'People who want to support art, culture, and education — without having to navigate the gallery world. Here, the context comes with the work.',
+              emoji: '🏡'
             },
-            {
-              step: '04',
-              who: 'After the Day',
-              title: 'The artwork finds its home',
-              body: 'The artist arranges delivery or pickup with the buyer. The certificate lives permanently at beforetheyrise.com, verifiable by anyone. The collection — and the artist\'s story — begins here.'
-            },
-          ].map((item) => (
-            <div key={item.step} className="flex gap-6">
-              <div className="flex-shrink-0 w-10 text-right">
-                <span className="text-xs text-amber-400 font-medium tracking-widest">{item.step}</span>
-              </div>
-              <div className="border-l-2 border-amber-100 pl-6 pb-2">
-                <p className="text-[10px] text-amber-500 tracking-widest uppercase mb-1">{item.who}</p>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
+          ].map(item => (
+            <div key={item.label} className="flex gap-5 p-6 bg-white rounded-xl border border-amber-100">
+              <span className="text-2xl flex-shrink-0">{item.emoji}</span>
+              <div>
+                <h3 className="serif font-medium text-gray-800 mb-1">{item.label}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* How to Register & Upload */}
-      <section className="bg-gray-50 border-y border-gray-100 py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-          <span className="inline-block bg-amber-100 text-amber-700 text-xs font-medium tracking-widest uppercase px-3 py-1 rounded-full mb-6">
-            For Artists
-          </span>
-          <h2 className="serif text-3xl font-light text-gray-900 mb-4">How to Join the Exhibition</h2>
-          <p className="text-gray-500 text-base leading-relaxed mb-12">
-            Getting your work onto the platform takes about five minutes. Here's exactly what to do.
+      {/* Vision */}
+      <section className="bg-gradient-to-r from-amber-50 to-rose-50 border-y border-amber-100 py-16 px-6 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="serif text-3xl font-light text-gray-900 mb-6">Where We're Headed</h2>
+          <p className="text-gray-600 leading-relaxed text-base mb-4">
+            We're starting in Los Angeles. Over time, we'll build student organizations at art schools
+            city by city — each one a local team, a local voice, a local show.
           </p>
-
-          <div className="space-y-10">
-            {/* Step 1 */}
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">1</div>
-              <div>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Create your account</h3>
-                <p className="text-sm text-gray-500 leading-relaxed mb-3">
-                  Go to <strong className="text-gray-700">beforetheyrise.com/register</strong> and sign up with your email address.
-                  This is your permanent artist account — you'll use it to manage your works, view orders, and access your QR labels.
-                </p>
-                <Link href="/register" className="inline-block text-xs bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-sm transition-colors">
-                  Register Now →
-                </Link>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">2</div>
-              <div>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Build your artist profile</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  After registering, fill in your name, school, graduation year, a short bio, and optionally a photo and Instagram handle.
-                  This is what buyers see when they tap your name — make it feel like you.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">3</div>
-              <div>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Upload your work</h3>
-                <p className="text-sm text-gray-500 leading-relaxed mb-3">
-                  From your dashboard, click <strong className="text-gray-700">"Add Work"</strong> and fill in the details:
-                </p>
-                <ul className="text-sm text-gray-500 space-y-1.5 pl-0">
-                  {[
-                    { field: 'Title', note: 'The name of the piece' },
-                    { field: 'Medium', note: 'e.g. Oil on canvas, Watercolor, Charcoal' },
-                    { field: 'Dimensions', note: 'Width × Height in cm' },
-                    { field: 'Year', note: '2026' },
-                    { field: 'Description', note: 'A few sentences about the work — what inspired it, what it means to you' },
-                    { field: 'Image', note: 'A clear photo of the work (good natural lighting, no shadows)' },
-                    { field: 'Price', note: 'Pre-set to $521 — the date, May 21st, graduation day' },
-                  ].map(item => (
-                    <li key={item.field} className="flex gap-2">
-                      <span className="text-amber-400">→</span>
-                      <span><strong className="text-gray-700">{item.field}:</strong> {item.note}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">4</div>
-              <div>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Print your QR label</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  Once your work is saved, go to your dashboard and click <strong className="text-gray-700">"Print QR Label"</strong> next to the work.
-                  A printable card will appear — it includes the QR code, your work's title, your name, and the price.
-                  Print it, cut it out, and attach it to the <strong className="text-gray-700">bottom-right corner</strong> of your artwork.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="flex gap-6">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-medium text-sm">5</div>
-              <div>
-                <h3 className="serif text-lg font-medium text-gray-800 mb-2">Show up on graduation day</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  Bring your work to campus on May 21st. Set it up near the ceremony — an easel is all you need.
-                  You don't need to handle payments. Anyone who wants to buy simply scans the QR code on their phone and completes the purchase online.
-                  You'll receive a notification, and the payment comes directly to you.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Tip box */}
-          <div className="mt-12 bg-white rounded-xl border border-amber-100 p-6">
-            <p className="text-sm font-medium text-gray-700 mb-2">💡 Tips for a great listing</p>
-            <ul className="text-sm text-gray-500 space-y-1.5">
-              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Photograph your work in natural daylight — it makes a huge difference.</span></li>
-              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Write your description in first person. Buyers want to hear <em>you</em>, not a press release.</span></li>
-              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Upload before May 15th so your work has time to appear in the gallery before the event.</span></li>
-              <li className="flex gap-2"><span className="text-amber-400">→</span><span>Check with your school about setting up near the commencement venue — most are supportive, but confirm in advance.</span></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Why $521 */}
-      <section className="bg-amber-50 border-y border-amber-100 py-16 px-6 text-center">
-        <div className="max-w-xl mx-auto">
-          <p className="text-5xl serif font-light text-amber-600 mb-4">$521</p>
-          <h2 className="serif text-2xl font-light text-gray-800 mb-4">The Price Means Something</h2>
-          <p className="text-gray-500 text-base leading-relaxed">
-            Every work in this exhibition is priced at <strong className="text-gray-700">$521</strong> —
-            not a round number, not an estimate of market value.
-            It's the date: <strong className="text-gray-700">May 21st</strong>.
-            Graduation day. The day the work was shown for the first time.
-            The price is part of the story.
+          <p className="text-gray-600 leading-relaxed text-base">
+            The art world has always had gatekeepers. We're building a door.
           </p>
         </div>
       </section>
 
-      {/* Why collect early */}
-      <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="serif text-3xl font-light text-gray-900 mb-6">Why Collect at the Beginning?</h2>
-        <div className="space-y-5 text-gray-600 leading-relaxed text-base">
-          <p>
-            The most significant art collections in the world weren't built by buying famous names.
-            They were built by people who paid attention early — who trusted their eye before anyone
-            else was looking.
-          </p>
-          <p>
-            A student graduation show is one of the last places left where you can walk up to an original
-            work, meet the person who made it, and bring it home for a few hundred dollars.
-            That window closes quickly.
-          </p>
-          <p>
-            We're not promising every artist here will be famous. But we are saying:
-            <em className="text-gray-800"> these works are real, these artists are serious, and this moment won't repeat itself.</em>
-          </p>
-        </div>
+      {/* Current Exhibition — Accordion */}
+      <section className="max-w-4xl mx-auto px-6 py-16">
+        <h2 className="serif text-2xl font-light text-gray-900 mb-6">Current Exhibition</h2>
+        <EventDetailsAccordion />
       </section>
 
       {/* CTA */}

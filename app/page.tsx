@@ -122,11 +122,11 @@ export default async function Home() {
                 Now Open · Class of 2026
               </span>
               <h2 className="serif text-3xl md:text-4xl font-light text-gray-900 mb-3">
-                Graduation Exhibition
+                Cal State Fullerton — Graduation Exhibition 2026
               </h2>
               <p className="text-gray-500 text-base leading-relaxed mb-6 max-w-lg">
-                Original works by this year's graduating students — 
-                paintings, drawings, mixed media, and more. 
+                Original works by this year's graduating students at California State University, Fullerton —
+                paintings, drawings, mixed media, and more.
                 Each piece carries the energy of a beginning.
               </p>
               <div className="flex flex-wrap gap-6 text-sm text-gray-500 mb-8">

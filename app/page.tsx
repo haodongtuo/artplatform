@@ -236,32 +236,45 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Artists */}
-      {artists.length > 0 && (
-        <section id="artists" className="bg-gradient-to-b from-[#FDFAF5] to-amber-50 py-16">
-          <div className="max-w-5xl mx-auto px-6">
-            <h2 className="serif text-3xl font-light mb-2 text-gray-900">The Class of 2026</h2>
-            <p className="text-gray-400 text-sm mb-10">The artists you'll want to say you knew first.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {artists.map((artist) => (
-                <Link key={artist.id} href={`/artist/${artist.id}`} className="group text-center">
-                  <div className="relative w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-amber-100 ring-2 ring-transparent group-hover:ring-amber-300 transition-all duration-300">
-                    {artist.photo_url ? (
-                      <Image src={artist.photo_url} alt={artist.name} fill className="object-cover group-hover:scale-110 transition-transform duration-300" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-2xl text-amber-400 serif font-light">
-                        {artist.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  <h3 className="serif font-medium text-sm text-gray-800 group-hover:text-amber-600 transition-colors">{artist.name}</h3>
-                  <p className="text-xs text-gray-400 mt-0.5">{artist.year || artist.school}</p>
-                </Link>
-              ))}
-            </div>
+      {/* New Artists Every Month */}
+      <section id="artists" className="max-w-5xl mx-auto px-6 py-16">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <h2 className="serif text-3xl font-light text-gray-900">New Artists Every Month</h2>
+            <p className="text-gray-400 text-sm mt-1">Fresh talent joining the platform — be the first to collect.</p>
           </div>
-        </section>
-      )}
+          <Link href="/gallery" className="text-sm text-amber-600 hover:text-amber-700 border-b border-amber-300 hover:border-amber-500 transition-colors pb-0.5">
+            See all artists →
+          </Link>
+        </div>
+
+        {artists.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {artists.map((artist) => (
+              <Link key={artist.id} href={`/artist/${artist.id}`} className="group text-center">
+                <div className="relative w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-amber-100 ring-2 ring-transparent group-hover:ring-amber-300 transition-all duration-300">
+                  {artist.photo_url ? (
+                    <Image src={artist.photo_url} alt={artist.name} fill className="object-cover group-hover:scale-110 transition-transform duration-300" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-2xl text-amber-400 serif font-light">
+                      {artist.name.charAt(0)}
+                    </div>
+                  )}
+                </div>
+                <h3 className="serif font-medium text-sm text-gray-800 group-hover:text-amber-600 transition-colors">{artist.name}</h3>
+                <p className="text-xs text-gray-400 mt-0.5">{artist.year || artist.school}</p>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="serif text-2xl text-gray-300 italic">Artists joining soon</div>
+            <p className="text-gray-400 mt-4 text-sm">New artists will appear here as they join the platform</p>
+          </div>
+        )}
+      </section>
+
+
 
       {/* How it works */}
       <section className="max-w-4xl mx-auto px-6 py-20 text-center">

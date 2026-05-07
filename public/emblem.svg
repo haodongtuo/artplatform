@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <title>Emerging Today Collect Tomorrow circular emblem</title>
+  <desc>Transparent-background circular emblem with curved text, side dots, and a purple eight-point asterisk.</desc>
+  <defs>
+    <path id="topArc" d="M 230 500 A 270 270 0 0 1 770 500" />
+    <path id="bottomArc" d="M 230 500 A 270 270 0 0 0 770 500" />
+  </defs>
+  <g id="emblem" fill="none">
+    <text font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" letter-spacing="8" fill="#111111">
+      <textPath href="#topArc" startOffset="50%" text-anchor="middle">EMERGING TODAY</textPath>
+    </text>
+    <text font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" letter-spacing="8" fill="#111111">
+      <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">COLLECT TOMORROW</textPath>
+    </text>
+    <circle cx="185" cy="500" r="12" fill="#111111"/>
+    <circle cx="815" cy="500" r="12" fill="#111111"/>
+    <g id="center-asterisk" stroke="#8E7AE6" stroke-width="17" stroke-linecap="round" opacity="0.96">
+      <line x1="430" y1="500" x2="570" y2="500"/>
+      <line x1="500" y1="430" x2="500" y2="570"/>
+      <line x1="450" y1="450" x2="550" y2="550"/>
+      <line x1="550" y1="450" x2="450" y2="550"/>
+    </g>
+  </g>
+</svg>

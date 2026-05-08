@@ -41,6 +41,15 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#f5f5f0]">
+
+        {/* Mobile only — full-bleed background image + thick gradient overlay */}
+        <div className="absolute inset-0 md:hidden z-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/hero-paint.jpg" alt="" className="w-full h-full object-cover object-center" />
+          {/* Thick white-to-transparent overlay so black text stays readable */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(245,245,240,0.92) 0%, rgba(245,245,240,0.88) 50%, rgba(245,245,240,0.70) 100%)' }} />
+        </div>
+
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
 
           {/* Left — Text */}
@@ -81,8 +90,8 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Right — Artistic collage */}
-          <div className="relative h-[480px] md:h-[540px]">
+          {/* Right — Artistic collage (desktop only) */}
+          <div className="hidden md:block relative h-[480px] md:h-[540px]">
 
             {/* Pink paint splash top-left */}
             <div className="absolute top-0 left-[5%] w-52 h-36 opacity-60 pointer-events-none"

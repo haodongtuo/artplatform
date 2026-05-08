@@ -47,7 +47,7 @@ export default async function Home() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/hero-paint.jpg" alt="" className="w-full h-full object-cover object-center" />
           {/* Thick white-to-transparent overlay so black text stays readable */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(245,245,240,0.92) 0%, rgba(245,245,240,0.88) 50%, rgba(245,245,240,0.70) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(245,245,240,0.78) 0%, rgba(245,245,240,0.65) 50%, rgba(245,245,240,0.40) 100%)' }} />
         </div>
 
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
